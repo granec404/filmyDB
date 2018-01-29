@@ -10,12 +10,12 @@
         Nahadzovanie nových filmov
         
         <h:form>
-            <h:inputText>
-                <f:ajax listener="#{cucaInfo.zrobHladanie}" render="idObsah" />
+            <h:inputText value="${appBean.search}">
+                <f:ajax listener="#{appBean.zrobHladanie}" render="idObsah" />
             </h:inputText>
         </h:form>
         
-        <h:outputText id="idObsah" value="#{cucaInfo.obsaznik}" />
+        <h:outputText id="idObsah" value="${appBean.obsah}" />
     </h:body>
 </html>
 

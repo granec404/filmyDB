@@ -52,6 +52,10 @@ public class appBean {
         return obsah;
     }
     
+    public boolean mameVysledky() {
+        return !(obsah.isEmpty());
+    }
+    
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
         obsah = ejb.getObsaznik();

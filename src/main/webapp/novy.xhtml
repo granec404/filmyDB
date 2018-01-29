@@ -10,12 +10,15 @@
         Nahadzovanie nových filmov
         
         <h:form>
-            <h:inputText value="${appBean.search}">
-                <f:ajax listener="#{appBean.zrobHladanie}" render="idObsah" />
+            <h:inputText value="${appBean.search}" label="Zadaj názov, alebo jeho časť">
             </h:inputText>
+            <h:commandButton value="Hľadaj" action="#{appBean.zrobHladanie}" />
         </h:form>
         
-        <h:outputText id="idObsah" value="${appBean.obsah}" />
+        <h:panelGroup id="filmy" rendered="#{appBean.mameVysledky}">
+            <h:outputText value="${appBean.obsah}" />
+        </h:panelGroup>
+        
     </h:body>
 </html>
 

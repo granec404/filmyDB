@@ -12,7 +12,7 @@
         <h:form>
             <h:inputText value="${appBean.search}" label="Zadaj názov, alebo jeho časť">
             </h:inputText>
-            <h:commandButton value="Hľadaj" action="#{appBean.zrobHladanie}" />
+            <h:commandButton value="Hľadaj" action="#{appBean.zrobHladanie}" label="Hľadaj" />
         </h:form>
         
         <h:panelGroup id="filmy" rendered="#{appBean.mameVysledky}">

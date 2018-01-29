@@ -19,6 +19,7 @@ public class appBean {
     private String privitanie = "hello";
     private String search = "";
     private String obsah = "";
+    private boolean mameVysledky = false;
     @Inject
     cucaInfo ejb;
 
@@ -52,8 +53,9 @@ public class appBean {
         return obsah;
     }
     
-    public boolean mameVysledky() {
-        return !(obsah.isEmpty());
+    public boolean isMameVysledky() {
+        mameVysledky = !(obsah.isEmpty());
+        return mameVysledky;
     }
     
     public void zrobHladanie() {

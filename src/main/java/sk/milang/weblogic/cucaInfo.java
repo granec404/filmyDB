@@ -29,7 +29,7 @@ public class cucaInfo {
             while (it.hasNext()) {
                 HashMap.Entry pair = (HashMap.Entry)it.next();
                 a = a + "<a href='"+pair.getValue()+"'>"+pair.getKey()+"</a><br/>";
-                it.remove(); // avoids a ConcurrentModificationException
+//                it.remove(); // avoids a ConcurrentModificationException
             }
             obsaznik = a;
         }
@@ -37,6 +37,10 @@ public class cucaInfo {
     
     public String getObsaznik() {
         return obsaznik;
+    }
+    
+    public HashMap<String, String> getZoznam() {
+        return x;
     }
     
     public HashMap<String, String> dajZoznam(String searchString) {
@@ -52,7 +56,21 @@ public class cucaInfo {
         }
         if (content != null) {
             HashMap<String, String> retval = new HashMap<String, String>();
-            retval.put("obsah", content);
+            int pos1 = 0;
+            int pos2 = 0;
+            int pos3 = 0;
+            String link = "";
+            String nazov = "";
+            while (content.indexOf("class=\"film c1\">", pos1) > 0) {
+                pos1 = content.indexOf("class=\"film c1\">", pos1);
+                pos2 = content.lastIndexOf("href=\"", pos1);
+                pos3 = content.indexOf("</a>", pos1);
+                if (pos1 > 0 && pos2 > 0 && pos3 > 0) {
+                    link = content.substring(pos2+6, pos1);
+                    nazov = content.substring(pos1+16, pos3);
+                    retval.put(link, nazov);
+                }
+            }
             return retval; 
         }
         return null;

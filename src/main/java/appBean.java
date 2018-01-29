@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.util.HashMap;
+import java.util.Iterator;
 import javax.inject.Named;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -60,7 +62,17 @@ public class appBean {
     
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
-        obsah = ejb.getObsaznik();
+        HashMap<String, String> zoznam = ejb.getZoznam();
+        if (zoznam!=null) {
+            obsah = "";
+            Iterator it = zoznam.entrySet().iterator();
+            while (it.hasNext()) {
+                HashMap.Entry pair = (HashMap.Entry)it.next();
+                obsah = obsah + pair.getValue() + "<br/>";
+//                it.remove(); // avoids a ConcurrentModificationException
+            }
+        }
+//        obsah = ejb.getObsaznik();
     }
     
 }

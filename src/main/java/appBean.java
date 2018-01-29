@@ -6,8 +6,8 @@
 
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import sk.milang.weblogic.cucaInfo;
 
@@ -16,7 +16,7 @@ import sk.milang.weblogic.cucaInfo;
  * @author milan
  */
 @Named(value = "appBean")
-@ViewScoped
+@SessionScoped
 public class appBean {
     private String privitanie = "hello";
     private String search = "";

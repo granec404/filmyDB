@@ -69,7 +69,7 @@ public class appBean {
             while (it.hasNext()) {
                 HashMap.Entry pair = (HashMap.Entry)it.next();
                 obsah = obsah + pair.getValue() + "<br/>";
-//                it.remove(); // avoids a ConcurrentModificationException
+                it.remove(); // avoids a ConcurrentModificationException
             }
         }
 //        obsah = ejb.getObsaznik();

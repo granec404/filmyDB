@@ -22,6 +22,7 @@ public class appBean implements Serializable {
     private String privitanie = "hello";
     private String search = "";
     private String obsah = "";
+    private HashMap<String, String> vysledkyHladania = null;
     private boolean mameVysledky = false;
     @Inject
     cucaInfo ejb;
@@ -57,22 +58,32 @@ public class appBean implements Serializable {
     }
     
     public boolean isMameVysledky() {
-        mameVysledky = !(obsah.isEmpty());
-        return mameVysledky;
+//        mameVysledky = !(obsah.isEmpty());
+//        return mameVysledky;
+        return (vysledkyHladania!=null && vysledkyHladania.size()>0);
+    }
+    
+    public HashMap<String, String> getVysledkyHladania() {
+        return vysledkyHladania;
+    }
+    
+    public setVysledkyHladania(HashMap<String, String> x) {
+        vysledkyHladania = x;
     }
     
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
-        HashMap<String, String> zoznam = ejb.getZoznam();
-        if (zoznam!=null) {
-            obsah = "";
-            Iterator it = zoznam.entrySet().iterator();
-            while (it.hasNext()) {
-                HashMap.Entry pair = (HashMap.Entry)it.next();
-                obsah = obsah + pair.getValue() + "<br/>";
-                it.remove(); // avoids a ConcurrentModificationException
-            }
-        }
+        vysledkyHladania = ejb.getZoznam();
+//        HashMap<String, String> zoznam = ejb.getZoznam();
+//        if (zoznam!=null) {
+//            obsah = "";
+//            Iterator it = zoznam.entrySet().iterator();
+//            while (it.hasNext()) {
+//                HashMap.Entry pair = (HashMap.Entry)it.next();
+//                obsah = obsah + pair.getValue() + "<br/>";
+//                it.remove(); // avoids a ConcurrentModificationException
+//            }
+//        }
         
 //        obsah = ejb.getObsaznik();
     }

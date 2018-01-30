@@ -22,6 +22,7 @@ public class appBean implements Serializable {
     private String privitanie = "hello";
     private String search = "";
     private String obsah = "";
+    private String log = "";
     private HashMap<String, String> vysledkyHladania = null;
     private boolean mameVysledky = false;
     @Inject
@@ -33,12 +34,16 @@ public class appBean implements Serializable {
     public appBean() {
     }
     
-    public String getPrivitanie() {
-        return privitanie;
+    public String getLog() {
+        return log;
     }
     
-    public void setPrivitanie(String nove) {
-        privitanie = nove;
+    public void setLog(String nove) {
+        log = nove;
+    }
+    
+    public void pripisLog(String x) {
+        log = log + x + ";";
     }
     
     public void setSearch(String s) {
@@ -60,6 +65,7 @@ public class appBean implements Serializable {
     public boolean isMameVysledky() {
 //        mameVysledky = !(obsah.isEmpty());
 //        return mameVysledky;
+        pripisLog("mame?: "+String.valueOf(vysledkyHladania!=null && vysledkyHladania.size()>0));
         return (vysledkyHladania!=null && vysledkyHladania.size()>0);
     }
     
@@ -74,6 +80,7 @@ public class appBean implements Serializable {
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
         vysledkyHladania = ejb.getZoznam();
+        pripisLog("mame: "+String.valueOf(vysledkyHladania.size()));
 //        HashMap<String, String> zoznam = ejb.getZoznam();
 //        if (zoznam!=null) {
 //            obsah = "";

@@ -67,7 +67,7 @@ public class appBean implements Serializable {
         return vysledkyHladania;
     }
     
-    public setVysledkyHladania(HashMap<String, String> x) {
+    public void setVysledkyHladania(HashMap<String, String> x) {
         vysledkyHladania = x;
     }
     

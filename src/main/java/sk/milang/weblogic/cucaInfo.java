@@ -59,15 +59,24 @@ public class cucaInfo {
             int pos1 = 0;
             int pos2 = 0;
             int pos3 = 0;
+            int pos4 = 0;
             String link = "";
             String nazov = "";
+            int rok = 0;
             while (content.indexOf("class=\"film c1\">", pos1) > 0) {
                 pos1 = content.indexOf("class=\"film c1\">", pos1);
                 pos2 = content.lastIndexOf("href=\"", pos1);
                 pos3 = content.indexOf("</a>", pos1);
+                pos4 = content.indexOf("</p>", pos3);
                 if (pos1 > 0 && pos2 > 0 && pos3 > 0) {
                     link = content.substring(pos2+6, pos1);
                     nazov = content.substring(pos1+16, pos3);
+                    rok = 0;
+                    if (pos4 > 0) {
+                        try {
+                            rok = Integer.parseInt(content.substring(pos4-4, pos4));
+                        } catch (Exception e) {rok=0;}
+                    }
                     retval.put(link, nazov);
                 }
                 pos1=pos1+1;

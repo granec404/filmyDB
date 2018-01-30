@@ -22,9 +22,9 @@
                 <h:outputText value="Výsledky:"/>
                 <!--<h:outputText value="${appBean.obsah}" escape="false" />-->
                 <!--<f:selectItems value="#{appBean.vysledkyHladania}" />-->
-                <h:selectOneMenu>
+                <h:selectOneListbox>
                     <f:selectItems value="#{appBean.vysledkyHladania.entrySet()}" var="entry" actionListener="" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
-                </h:selectOneMenu>
+                </h:selectOneListbox>
                 <h:commandButton value="Natiahni" action="#{appBean.natiahniUdaje}" label="Natiahni" />
             </h:form>
         </h:panelGroup>

@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
 import sk.milang.weblogic.cucaInfo;
@@ -17,7 +18,7 @@ import sk.milang.weblogic.cucaInfo;
  */
 @Named(value = "appBean")
 @SessionScoped
-public class appBean {
+public class appBean implements Serializable {
     private String privitanie = "hello";
     private String search = "";
     private String obsah = "";

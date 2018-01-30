@@ -70,6 +70,7 @@ public class cucaInfo {
                     nazov = content.substring(pos1+16, pos3);
                     retval.put(link, nazov);
                 }
+                pos1=pos1+1;
             }
             return retval; 
         }

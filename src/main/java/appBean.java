@@ -77,6 +77,10 @@ public class appBean implements Serializable {
         vysledkyHladania = x;
     }
     
+    public void natiahniUdaje() {
+        return;
+    }
+    
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
         vysledkyHladania = ejb.getZoznam();

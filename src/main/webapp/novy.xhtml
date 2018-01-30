@@ -18,12 +18,15 @@
         <!--<h:outputText value="#{appBean.log}"/>-->
         
         <h:panelGroup id="filmy" rendered="#{appBean.mameVysledky}">
-            <h:outputText value="Výsledky:"/>
-            <!--<h:outputText value="${appBean.obsah}" escape="false" />-->
-            <!--<f:selectItems value="#{appBean.vysledkyHladania}" />-->
-            <h:selectOneMenu>
-                <f:selectItems value="#{appBean.vysledkyHladania.entrySet()}" var="entry" actionListener="" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
-            </h:selectOneMenu>
+            <h:form>
+                <h:outputText value="Výsledky:"/>
+                <!--<h:outputText value="${appBean.obsah}" escape="false" />-->
+                <!--<f:selectItems value="#{appBean.vysledkyHladania}" />-->
+                <h:selectOneMenu>
+                    <f:selectItems value="#{appBean.vysledkyHladania.entrySet()}" var="entry" actionListener="" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+                </h:selectOneMenu>
+                <h:commandButton value="Natiahni" action="#{appBean.natiahniUdaje}" label="Natiahni" />
+            </h:form>
         </h:panelGroup>
         
     </h:body>

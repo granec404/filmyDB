@@ -61,17 +61,18 @@ public class appBean {
     }
     
     public void zrobHladanie() {
-        ejb.zrobHladanie(search);
-        HashMap<String, String> zoznam = ejb.getZoznam();
-        if (zoznam!=null) {
-            obsah = "";
-            Iterator it = zoznam.entrySet().iterator();
-            while (it.hasNext()) {
-                HashMap.Entry pair = (HashMap.Entry)it.next();
-                obsah = obsah + pair.getValue() + "<br/>";
-                it.remove(); // avoids a ConcurrentModificationException
-            }
-        }
+//        ejb.zrobHladanie(search);
+//        HashMap<String, String> zoznam = ejb.getZoznam();
+//        if (zoznam!=null) {
+//            obsah = "";
+//            Iterator it = zoznam.entrySet().iterator();
+//            while (it.hasNext()) {
+//                HashMap.Entry pair = (HashMap.Entry)it.next();
+//                obsah = obsah + pair.getValue() + "<br/>";
+//                it.remove(); // avoids a ConcurrentModificationException
+//            }
+//        }
+        
 //        obsah = ejb.getObsaznik();
     }
     

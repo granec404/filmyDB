@@ -65,7 +65,7 @@ public class appBean implements Serializable {
     public boolean isMameVysledky() {
 //        mameVysledky = !(obsah.isEmpty());
 //        return mameVysledky;
-        pripisLog("mame?: "+String.valueOf(vysledkyHladania!=null && vysledkyHladania.size()>0));
+//        pripisLog("mame?: "+String.valueOf(vysledkyHladania!=null && vysledkyHladania.size()>0));
         return (vysledkyHladania!=null && vysledkyHladania.size()>0);
     }
     
@@ -80,7 +80,7 @@ public class appBean implements Serializable {
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
         vysledkyHladania = ejb.getZoznam();
-        pripisLog("mame: "+String.valueOf(vysledkyHladania.size()));
+//        pripisLog("mame: "+String.valueOf(vysledkyHladania.size()));
 //        HashMap<String, String> zoznam = ejb.getZoznam();
 //        if (zoznam!=null) {
 //            obsah = "";

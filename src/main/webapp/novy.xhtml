@@ -16,8 +16,9 @@
         </h:form>
         
         <h:panelGroup id="filmy" rendered="#{appBean.mameVysledky}">
+            <h:outputText value="Výsledky:"/>
             <!--<h:outputText value="${appBean.obsah}" escape="false" />-->
-            <f:selectItems value="#{appBean.vysledkyHladania}" />
+            <f:selectItems value="${appBean.vysledkyHladania}" />
         </h:panelGroup>
         
     </h:body>

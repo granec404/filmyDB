@@ -23,16 +23,16 @@ public class cucaInfo {
     
     public void zrobHladanie(String search) {
         x = dajZoznam(search);
-        if (x!=null) {
-            String a = "";
-            Iterator it = x.entrySet().iterator();
-            while (it.hasNext()) {
-                HashMap.Entry pair = (HashMap.Entry)it.next();
-                a = a + "<a href='"+pair.getValue()+"'>"+pair.getKey()+"</a><br/>";
-//                it.remove(); // avoids a ConcurrentModificationException
-            }
-            obsaznik = a;
-        }
+//        if (x!=null) {
+//            String a = "";
+//            Iterator it = x.entrySet().iterator();
+//            while (it.hasNext()) {
+//                HashMap.Entry pair = (HashMap.Entry)it.next();
+//                a = a + "<a href='"+pair.getValue()+"'>"+pair.getKey()+"</a><br/>";
+////                it.remove(); // avoids a ConcurrentModificationException
+//            }
+//            obsaznik = a;
+//        }
     }
     
     public String getObsaznik() {

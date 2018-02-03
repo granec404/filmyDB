@@ -60,7 +60,7 @@ public class cucaInfo {
                 pos3 = content.indexOf("</a>", pos1);
                 pos4 = content.indexOf("</p>", pos3);
                 if (pos1 > 0 && pos2 > 0 && pos3 > 0) {
-                    link = content.substring(pos2+6, pos1);
+                    link = content.substring(pos2+6, pos1-1).replace("\"", "").trim();
                     nazov = content.substring(pos1+16, pos3);
                     rok = 0;
                     if (pos4 > 0) {

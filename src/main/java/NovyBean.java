@@ -5,33 +5,34 @@
  */
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import javax.enterprise.context.SessionScoped;
+//import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
+import sk.milang.weblogic.Film;
 import sk.milang.weblogic.cucaInfo;
 
 /**
  *
  * @author milan
  */
-@Named(value = "appBean")
-@SessionScoped
-public class appBean implements Serializable {
+@Named(value = "novyBean")
+@ViewScoped
+public class NovyBean implements Serializable {
     private String privitanie = "hello";
     private String search = "";
     private String obsah = "";
     private String log = "";
-    private HashMap<String, String> vysledkyHladania = null;
+    private Film film = new Film();
+    private ArrayList<Film> vysledkyHladania = null;
     private boolean mameVysledky = false;
     @Inject
     cucaInfo ejb;
 
-    /**
-     * Creates a new instance of appBean
-     */
-    public appBean() {
+    public NovyBean() {
     }
     
     public String getLog() {
@@ -69,11 +70,11 @@ public class appBean implements Serializable {
         return (vysledkyHladania!=null && vysledkyHladania.size()>0);
     }
     
-    public HashMap<String, String> getVysledkyHladania() {
+    public ArrayList<Film> getVysledkyHladania() {
         return vysledkyHladania;
     }
     
-    public void setVysledkyHladania(HashMap<String, String> x) {
+    public void setVysledkyHladania(ArrayList<Film> x) {
         vysledkyHladania = x;
     }
     
@@ -83,20 +84,7 @@ public class appBean implements Serializable {
     
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
-        vysledkyHladania = ejb.getZoznam();
-//        pripisLog("mame: "+String.valueOf(vysledkyHladania.size()));
-//        HashMap<String, String> zoznam = ejb.getZoznam();
-//        if (zoznam!=null) {
-//            obsah = "";
-//            Iterator it = zoznam.entrySet().iterator();
-//            while (it.hasNext()) {
-//                HashMap.Entry pair = (HashMap.Entry)it.next();
-//                obsah = obsah + pair.getValue() + "<br/>";
-//                it.remove(); // avoids a ConcurrentModificationException
-//            }
-//        }
-        
-//        obsah = ejb.getObsaznik();
+        vysledkyHladania = ejb.nacitajZoznam(search);
     }
     
 }

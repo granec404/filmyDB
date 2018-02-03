@@ -18,6 +18,13 @@ public class Film {
     private String krajina = "";
     private String zaner = "";
 
+    public String getNazovRok() {
+        if (rok==0) {
+            return nazov;
+        }
+        return nazov + " (" + String.valueOf(rok) + ")";
+    }
+
     public String getNazov() {
         return nazov;
     }

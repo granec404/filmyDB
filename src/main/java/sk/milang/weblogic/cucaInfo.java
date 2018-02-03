@@ -7,8 +7,8 @@ package sk.milang.weblogic;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Scanner;
 import javax.ejb.Stateless;
 
@@ -19,31 +19,22 @@ import javax.ejb.Stateless;
 @Stateless
 public class cucaInfo {
     HashMap<String, String> x = null;
+    ArrayList<Film> list = null;
     private String obsaznik = "";
     
     public void zrobHladanie(String search) {
-        x = dajZoznam(search);
-//        if (x!=null) {
-//            String a = "";
-//            Iterator it = x.entrySet().iterator();
-//            while (it.hasNext()) {
-//                HashMap.Entry pair = (HashMap.Entry)it.next();
-//                a = a + "<a href='"+pair.getValue()+"'>"+pair.getKey()+"</a><br/>";
-////                it.remove(); // avoids a ConcurrentModificationException
-//            }
-//            obsaznik = a;
-//        }
+        list = nacitajZoznam(search);
     }
     
     public String getObsaznik() {
         return obsaznik;
     }
     
-    public HashMap<String, String> getZoznam() {
-        return x;
+    public ArrayList<Film> getZoznam() {
+        return list;
     }
     
-    public HashMap<String, String> dajZoznam(String searchString) {
+    public ArrayList<Film> nacitajZoznam(String searchString) {
         String content = null;
         URLConnection connection = null;
         searchString = searchString.trim().replace(" ", "+");
@@ -55,7 +46,7 @@ public class cucaInfo {
         }catch ( Exception ex ) {
         }
         if (content != null) {
-            HashMap<String, String> retval = new HashMap<String, String>();
+            ArrayList<Film> retval = new ArrayList<Film>();
             int pos1 = 0;
             int pos2 = 0;
             int pos3 = 0;
@@ -77,7 +68,11 @@ public class cucaInfo {
                             rok = Integer.parseInt(content.substring(pos4-4, pos4));
                         } catch (Exception e) {rok=0;}
                     }
-                    retval.put(link, nazov);
+                    Film x = new Film();
+                    x.setNazov(nazov);
+                    x.setLink(link);
+                    x.setRok(rok);
+                    retval.add(x);
                 }
                 pos1=pos1+1;
             }
@@ -85,7 +80,21 @@ public class cucaInfo {
         }
         return null;
     }
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+
+    public Film nacitajFilm(String link) {
+        String content = null;
+        URLConnection connection = null;
+        Film nacitany = null;
+        try {
+          connection =  new URL("link").openConnection();
+          Scanner scanner = new Scanner(connection.getInputStream());
+          scanner.useDelimiter("\\Z");
+          content = scanner.next();
+        }catch ( Exception ex ) {
+        }
+        if (content != null) {
+            
+        }
+        return nacitany;
+    }
 }

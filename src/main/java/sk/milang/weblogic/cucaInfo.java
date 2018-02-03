@@ -86,7 +86,7 @@ public class cucaInfo {
         URLConnection connection = null;
         Film nacitany = null;
         try {
-          connection =  new URL("link").openConnection();
+          connection =  new URL(link).openConnection();
           Scanner scanner = new Scanner(connection.getInputStream());
           scanner.useDelimiter("\\Z");
           content = scanner.next();

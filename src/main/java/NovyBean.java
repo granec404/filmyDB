@@ -100,7 +100,7 @@ public class NovyBean implements Serializable {
             return;
         }
         setLog("ideme natiahnut link "+zvoleny);
-        film = ejb.nacitajFilm(zvoleny);
+        film = ejb.nacitajFilm("https://www.csfd.cz"+zvoleny);
         if (film!=null) {
             setLog("film nie je null "+film.getNazov());
         }

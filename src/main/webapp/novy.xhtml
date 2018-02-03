@@ -19,13 +19,13 @@
         
         <h:panelGroup id="filmy" rendered="#{novyBean.mameVysledky}">
             <h:form>
-                <h:outputText value="Výsledky:"/>
-                <!--<h:outputText value="${novyBean.obsah}" escape="false" />-->
-                <!--<f:selectItems value="#{novyBean.vysledkyHladania}" />-->
-                <h:selectOneListbox>
-                    <f:selectItems value="#{novyBean.vysledkyHladania}" var="entry" actionListener="" itemLabel="#{entry.getNazovRok()}" itemValue="#{entry}" />
-                </h:selectOneListbox>
-                <h:commandButton value="Natiahni" action="#{novyBean.natiahniUdaje}" label="Natiahni" />
+                <h:panelGrid columns="3">
+                    <h:outputText value="Výsledky:"/>
+                    <h:selectOneListbox value="${novyBean.zvoleny}">
+                        <f:selectItems value="#{novyBean.vysledkyHladania}" var="entry" actionListener="" itemLabel="#{entry.getNazovRok()}" itemValue="#{entry}" />
+                    </h:selectOneListbox>
+                    <h:commandButton value="Natiahni" action="#{novyBean.natiahniUdaje}" label="Natiahni" />
+                </h:panelGrid>
             </h:form>
         </h:panelGroup>
         
@@ -35,6 +35,9 @@
                 <h:inputText value="${novyBean.film.nazov}"/>
                 
                 <h:outputLabel>Rok:</h:outputLabel>
+                <h:inputText value="${novyBean.film.rok}"/>
+                
+                <h:outputLabel>Dĺžka (minutáž):</h:outputLabel>
                 <h:inputText value="${novyBean.film.rok}"/>
                 
                 <h:outputLabel>Herci:</h:outputLabel>

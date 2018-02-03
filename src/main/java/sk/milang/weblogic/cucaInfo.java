@@ -93,8 +93,109 @@ public class cucaInfo {
         }catch ( Exception ex ) {
         }
         if (content != null) {
+            nacitany = new Film();
+            nacitany.setLink(link);
+            int pos1 = 0;
+            int pos2 = 0;
+            int posPom = 0;
+            // NAZOV
+            pos1 = content.indexOf("<h1 itemprop=\"name\">");
+            if (pos1>0) {
+                pos2 = content.indexOf("</h1>", pos1);
+                if (pos2>0) {
+                    nacitany.setNazov(content.substring(pos1+20, pos2).trim());
+                    posPom = pos2;
+                }
+            }
+
+            // ZANRE
+            pos1 = content.indexOf("<p class=\"genre\">");
+            if (pos1>0) {
+                pos2 = content.indexOf("</p>", pos1);
+                if (pos2>0) {
+                    nacitany.setZaner(content.substring(pos1+17, pos2).trim());
+                    posPom = pos2;
+                }
+            }
+
+            // KRAJINY
+            pos1 = content.indexOf("<p class=\"origin\">");
+            if (pos1>0) {
+                pos2 = content.indexOf("</p>", pos1);
+                if (pos2>0) {
+                    String krajiny = content.substring(pos1+18, pos2).replace(",", "");
+                    nacitany.setKrajina(krajiny);
+                    posPom = pos2;
+                }
+            }
+
+            // ROK
+            pos1 = content.indexOf("<span itemprop=\"dateCreated\">");
+            if (pos1>0) {
+                pos2 = content.indexOf("</span>", pos1);
+                if (pos2>0) {
+                    nacitany.setRok(Integer.parseInt(content.substring(pos1+29, pos2).trim()));
+                    posPom = pos2;
+                    
+                    // MINUTAZ
+                    pos2 = content.indexOf("</p>", pos2);
+                    pos1 = content.lastIndexOf("</span>,", pos2);
+                    if (pos1 > 0 && pos2 > 0) {
+                        int minutaz = 0;
+                        try {
+                            minutaz = Integer.parseInt(content.substring(pos1+8, pos2).replace("min", ""));
+                        } catch (Exception e) {}
+                        nacitany.setMinutaz(minutaz);
+                    }
+                }
+            }
             
+
+            // ALT NAZVY
+            ArrayList<String> alt = new ArrayList<String>();
+            pos1 = content.indexOf("<ul class=\"names\">", posPom);
+            if (pos1>0) {
+                pos2 = content.indexOf("</ul>", pos1);
+                if (pos2>0) {
+                    posPom = pos2;
+                    String nazvy = content.substring(pos1+18, pos2);
+                    pos1=0; pos2=0;
+                    while (nazvy.indexOf("<h3>", pos1)>0) {
+                        pos1 = nazvy.indexOf("<h3>", pos1);
+                        pos2 = nazvy.indexOf("</h3>", pos1);
+                        if (pos1 > 0 && pos2 >0) {
+                            alt.add(nazvy.substring(pos1+3, pos2).trim());
+                        }
+                        pos1 = pos1+1;
+                    }
+                    nacitany.setAltNazvyList(alt);
+                }
+            }
+            
+            // HERCI
+            ArrayList<String> h = new ArrayList<String>();
+            pos1 = content.indexOf("<h4>Hrají:</h4>", posPom);
+            if (pos1>0) {
+                pos2 = content.indexOf("</span>", pos1);
+                if (pos2>0) {
+                    posPom = pos2;
+                    String herci = content.substring(pos1, pos2);
+                    pos1=0; pos2=0;
+                    while (herci.indexOf("</a>", pos2)>0) {
+                        pos2 = herci.indexOf("</a>", pos2);     // tu hladam najprv koniec
+                        pos1 = herci.lastIndexOf(">", pos2);    // a odneho zaciatok
+                        if (pos1 > 0 && pos2 >0) {
+                            h.add(herci.substring(pos1+1, pos2).trim());
+                        }
+                        pos2 = pos2+1;
+                    }
+                    nacitany.setHerciList(h);
+                }
+            }
         }
+
+
+
         return nacitany;
     }
 }

@@ -5,6 +5,9 @@
  */
 package sk.milang.weblogic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author milan
@@ -13,10 +16,24 @@ public class Film {
     private String nazov = "";
     private String link = "";
     private int rok = 0;
-    private String herci = "";
-    private String altNazvy = "";
-    private String krajina = "";
-    private String zaner = "";
+    private ArrayList<String> herci = new ArrayList<String>();
+    private ArrayList<String> altNazvy = new ArrayList<String>();
+    private ArrayList<String> krajina = new ArrayList<String>();
+    private ArrayList<String> zaner = new ArrayList<String>();
+    private int minutaz = 0;
+
+    public int getMinutaz() {
+        return minutaz;
+    }
+
+    public void setMinutaz(int minutaz) {
+        this.minutaz = minutaz;
+    }
+
+    public void setMinutaz(String minutaz) {
+        minutaz = minutaz.replace("min", "").trim();
+        this.minutaz = Integer.parseInt(minutaz);
+    }
 
     public String getNazovRok() {
         if (rok==0) {
@@ -49,38 +66,92 @@ public class Film {
         this.rok = rok;
     }
 
-    public String getHerci() {
+    public ArrayList<String> getHerciList() {
         return herci;
     }
 
-    public void setHerci(String herci) {
+    public String getHerci() {
+        String r = "";
+        if (herci!=null && herci.size()>0) {
+            for (String herec : herci) {
+                r = r + (r.isEmpty() ? "" : " / ") + herec;
+            }
+        }
+        return r;
+    } 
+
+    public void setHerciList(ArrayList<String> herci) {
         this.herci = herci;
     }
 
-    public String getAltNazvy() {
+    public void setHerci(String herci) {
+        this.herci = (ArrayList<String>) Arrays.asList(herci.split("\\s*,\\s*"));
+    }
+
+    public ArrayList<String> getAltNazvyList() {
         return altNazvy;
     }
 
-    public void setAltNazvy(String altNazvy) {
+    public String getAltNazvy() {
+        String r = "";
+        if (altNazvy!=null && altNazvy.size()>0) {
+            for (String alt : altNazvy) {
+                r = r + (r.isEmpty() ? "" : " / ") + alt;
+            }
+        }
+        return r;
+    }
+
+    public void setAltNazvyList(ArrayList<String> altNazvy) {
         this.altNazvy = altNazvy;
     }
 
-    public String getKrajina() {
+    public void setAltNazvy(String nazvy) {
+        this.altNazvy = (ArrayList<String>) Arrays.asList(nazvy.split("\\s*,\\s*"));
+    }
+
+    public ArrayList<String> getKrajinaList() {
         return krajina;
     }
 
-    public void setKrajina(String krajina) {
+    public String getKrajina() {
+        String r = "";
+        if (krajina!=null && krajina.size()>0) {
+            for (String k : krajina) {
+                r = r + (r.isEmpty() ? "" : " / ") + k;
+            }
+        }
+        return r;
+    }
+
+    public void setKrajinaList(ArrayList<String> krajina) {
         this.krajina = krajina;
     }
 
-    public String getZaner() {
+    public void setKrajina(String krajiny) {
+        this.krajina = (ArrayList<String>) Arrays.asList(krajiny.split("\\s*,\\s*"));
+    }
+
+    public ArrayList<String> getZanerList() {
         return zaner;
     }
 
-    public void setZaner(String zaner) {
+    public String getZaner() {
+        String r = "";
+        if (zaner!=null && zaner.size()>0) {
+            for (String z : zaner) {
+                r = r + (r.isEmpty() ? "" : " / ") + z;
+            }
+        }
+        return r;
+    }
+
+    public void setZanerList(ArrayList<String> zaner) {
         this.zaner = zaner;
     }
     
-    
+    public void setZaner(String zanre) {
+        this.zaner = (ArrayList<String>) Arrays.asList(zanre.split("\\s*,\\s*"));
+    }
     
 }

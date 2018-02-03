@@ -26,18 +26,18 @@ public class NovyBean implements Serializable {
     private String search = "";
     private String obsah = "";
     private String log = "";
-    private Film zvoleny = new Film();
+    private String zvoleny = "";
     private Film film = new Film();
     private ArrayList<Film> vysledkyHladania = null;
     private boolean mameVysledky = false;
     @Inject
     cucaInfo ejb;
 
-    public Film getZvoleny() {
+    public String getZvoleny() {
         return zvoleny;
     }
 
-    public void setZvoleny(Film zvoleny) {
+    public void setZvoleny(String zvoleny) {
         this.zvoleny = zvoleny;
     }
 
@@ -96,10 +96,10 @@ public class NovyBean implements Serializable {
     }
     
     public void natiahniUdaje() {
-        if (zvoleny==null || zvoleny.getLink().isEmpty()) {
+        if (zvoleny==null || zvoleny.isEmpty()) {
             return;
         }
-        film = ejb.nacitajFilm(zvoleny.getLink());
+        film = ejb.nacitajFilm(zvoleny);
         return;
     }
     

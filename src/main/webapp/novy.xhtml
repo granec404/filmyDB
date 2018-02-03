@@ -22,7 +22,7 @@
                 <h:panelGrid columns="3">
                     <h:outputText value="Výsledky:"/>
                     <h:selectOneListbox value="${novyBean.zvoleny}">
-                        <f:selectItems value="#{novyBean.vysledkyHladania}" var="entry" actionListener="" itemLabel="#{entry.getNazovRok()}" itemValue="#{entry}" />
+                        <f:selectItems value="#{novyBean.vysledkyHladania}" var="entry" actionListener="" itemLabel="#{entry.getNazovRok()}" itemValue="#{entry.link}" />
                     </h:selectOneListbox>
                     <h:commandButton value="Natiahni" action="#{novyBean.natiahniUdaje}" label="Natiahni" />
                 </h:panelGrid>

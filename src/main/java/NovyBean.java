@@ -99,7 +99,11 @@ public class NovyBean implements Serializable {
         if (zvoleny==null || zvoleny.isEmpty()) {
             return;
         }
+        setLog("ideme natiahnut link "+zvoleny);
         film = ejb.nacitajFilm(zvoleny);
+        if (film!=null) {
+            setLog("film nie je null "+film.getNazov());
+        }
         return;
     }
     

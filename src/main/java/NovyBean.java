@@ -32,6 +32,14 @@ public class NovyBean implements Serializable {
     @Inject
     cucaInfo ejb;
 
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
     public NovyBean() {
     }
     

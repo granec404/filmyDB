@@ -23,7 +23,7 @@
                 <!--<h:outputText value="${novyBean.obsah}" escape="false" />-->
                 <!--<f:selectItems value="#{novyBean.vysledkyHladania}" />-->
                 <h:selectOneListbox>
-                    <f:selectItems value="#{novyBean.vysledkyHladania}" var="entry" actionListener="" itemValue="#{entry.getNazovRok()}" />
+                    <f:selectItems value="#{novyBean.vysledkyHladania}" var="entry" actionListener="" itemLabel="#{entry.getNazovRok()}" itemValue="#{entry}" />
                 </h:selectOneListbox>
                 <h:commandButton value="Natiahni" action="#{novyBean.natiahniUdaje}" label="Natiahni" />
             </h:form>

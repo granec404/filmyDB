@@ -161,7 +161,8 @@ private String content="";
     }
     
     public void setZaner(String zanre) {
-        this.zaner = (ArrayList<String>) Arrays.asList(zanre.split("\\s*,\\s*"));
+        this.zaner = new ArrayList<String>();
+        this.zaner.addAll(Arrays.asList(zanre.split("\\s*,\\s*")));
     }
     
 }

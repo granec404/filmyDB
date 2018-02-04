@@ -5,9 +5,7 @@
  */
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 //import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -22,14 +20,12 @@ import sk.milang.weblogic.cucaInfo;
 @Named(value = "novyBean")
 @ViewScoped
 public class NovyBean implements Serializable {
-    private String privitanie = "hello";
     private String search = "";
     private String obsah = "";
     private String log = "";
     private String zvoleny = "";
     private Film film = new Film();
-    private ArrayList<Film> vysledkyHladania = null;
-    private boolean mameVysledky = false;
+    private List<Film> vysledkyHladania = null;
     @Inject
     cucaInfo ejb;
 
@@ -87,11 +83,11 @@ public class NovyBean implements Serializable {
         return (vysledkyHladania!=null && vysledkyHladania.size()>0);
     }
     
-    public ArrayList<Film> getVysledkyHladania() {
+    public List<Film> getVysledkyHladania() {
         return vysledkyHladania;
     }
     
-    public void setVysledkyHladania(ArrayList<Film> x) {
+    public void setVysledkyHladania(List<Film> x) {
         vysledkyHladania = x;
     }
     

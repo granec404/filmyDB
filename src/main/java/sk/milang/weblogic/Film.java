@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package sk.milang.weblogic;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -16,10 +16,10 @@ public class Film {
     private String nazov = "";
     private String link = "";
     private int rok = 0;
-    private ArrayList<String> herci = new ArrayList<String>();
-    private ArrayList<String> altNazvy = new ArrayList<String>();
-    private ArrayList<String> krajina = new ArrayList<String>();
-    private ArrayList<String> zaner = new ArrayList<String>();
+    private List<String> herci = new ArrayList<String>();
+    private List<String> altNazvy = new ArrayList<String>();
+    private List<String> krajina = new ArrayList<String>();
+    private List<String> zaner = new ArrayList<String>();
     private int minutaz = 0;
 private String content="";
 
@@ -76,7 +76,7 @@ private String content="";
         this.rok = rok;
     }
 
-    public ArrayList<String> getHerciList() {
+    public List<String> getHerciList() {
         return herci;
     }
 
@@ -90,15 +90,15 @@ private String content="";
         return r;
     } 
 
-    public void setHerciList(ArrayList<String> herci) {
+    public void setHerciList(List<String> herci) {
         this.herci = herci;
     }
 
     public void setHerci(String herci) {
-        this.herci = (ArrayList<String>) Arrays.asList(herci.split("\\s*,\\s*"));
+        this.herci = Arrays.asList(herci.split("\\s*,\\s*"));
     }
 
-    public ArrayList<String> getAltNazvyList() {
+    public List<String> getAltNazvyList() {
         return altNazvy;
     }
 
@@ -112,15 +112,15 @@ private String content="";
         return r;
     }
 
-    public void setAltNazvyList(ArrayList<String> altNazvy) {
+    public void setAltNazvyList(List<String> altNazvy) {
         this.altNazvy = altNazvy;
     }
 
     public void setAltNazvy(String nazvy) {
-        this.altNazvy = (ArrayList<String>) Arrays.asList(nazvy.split("\\s*,\\s*"));
+        this.altNazvy = Arrays.asList(nazvy.split("\\s*,\\s*"));
     }
 
-    public ArrayList<String> getKrajinaList() {
+    public List<String> getKrajinaList() {
         return krajina;
     }
 
@@ -134,16 +134,15 @@ private String content="";
         return r;
     }
 
-    public void setKrajinaList(ArrayList<String> krajina) {
+    public void setKrajinaList(List<String> krajina) {
         this.krajina = krajina;
     }
 
     public void setKrajina(String krajiny) {
-        this.krajina = new ArrayList<String>();
-        this.krajina.addAll(Arrays.asList(krajiny.split("\\s*,\\s*")));
+        this.krajina = Arrays.asList(krajiny.split("\\s*,\\s*"));
     }
 
-    public ArrayList<String> getZanerList() {
+    public List<String> getZanerList() {
         return zaner;
     }
 
@@ -157,13 +156,12 @@ private String content="";
         return r;
     }
 
-    public void setZanerList(ArrayList<String> zaner) {
+    public void setZanerList(List<String> zaner) {
         this.zaner = zaner;
     }
     
     public void setZaner(String zanre) {
-        this.zaner = new ArrayList<String>();
-        this.zaner.addAll(Arrays.asList(zanre.split("\\s*,\\s*")));
+        this.zaner = Arrays.asList(zanre.split("\\s*,\\s*"));
     }
     
 }

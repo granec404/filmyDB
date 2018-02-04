@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.zip.GZIPInputStream;
@@ -23,7 +24,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class cucaInfo {
     HashMap<String, String> x = null;
-    ArrayList<Film> list = null;
+    List<Film> list = null;
     private String obsaznik = "";
     
     public void zrobHladanie(String search) {
@@ -34,11 +35,11 @@ public class cucaInfo {
         return obsaznik;
     }
     
-    public ArrayList<Film> getZoznam() {
+    public List<Film> getZoznam() {
         return list;
     }
     
-    public ArrayList<Film> nacitajZoznam(String searchString) {
+    public List<Film> nacitajZoznam(String searchString) {
         String content = null;
         URLConnection connection = null;
         searchString = searchString.trim().replace(" ", "+");
@@ -50,7 +51,7 @@ public class cucaInfo {
         }catch ( Exception ex ) {
         }
         if (content != null) {
-            ArrayList<Film> retval = new ArrayList<Film>();
+            List<Film> retval = new ArrayList<Film>();
             int pos1 = 0;
             int pos2 = 0;
             int pos3 = 0;
@@ -165,7 +166,7 @@ public class cucaInfo {
             
 
             // ALT NAZVY
-            ArrayList<String> alt = new ArrayList<String>();
+            List<String> alt = new ArrayList<String>();
             pos1 = content.indexOf("<ul class=\"names\">", posPom);
             if (pos1>0) {
                 pos2 = content.indexOf("</ul>", pos1);
@@ -186,7 +187,7 @@ public class cucaInfo {
             }
             
             // HERCI
-            ArrayList<String> h = new ArrayList<String>();
+            List<String> h = new ArrayList<String>();
             pos1 = content.indexOf("<h4>Hrají:</h4>", posPom);
             if (pos1>0) {
                 pos2 = content.indexOf("</span>", pos1);

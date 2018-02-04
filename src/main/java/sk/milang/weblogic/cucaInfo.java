@@ -5,11 +5,15 @@
  */
 package sk.milang.weblogic;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
 import javax.ejb.Stateless;
 
 /**
@@ -87,11 +91,17 @@ public class cucaInfo {
         Film nacitany = null;
         link = "https://www.csfd.cz" + link + "prehled/";
         try {
-          connection =  new URL(link).openConnection();
-          Scanner scanner = new Scanner(connection.getInputStream());
-          scanner.useDelimiter("\\Z");
-          content = scanner.next();
-          content = connection.getContentEncoding() + " --- " + content;
+            connection =  new URL(link).openConnection();
+            InputStream instr = null;
+            if (connection.getContentEncoding().equalsIgnoreCase("gzip")) {
+                instr = new GZIPInputStream(connection.getInputStream());
+            } else {
+                instr = new InflaterInputStream(connection.getInputStream(),new Inflater(true));
+            }
+            Scanner scanner = new Scanner(instr);
+            scanner.useDelimiter("\\Z");
+            content = scanner.next();
+            content = connection.getContentEncoding() + " --- " + content;
         }catch ( Exception ex ) {
         }
         if (content != null) {

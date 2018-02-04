@@ -85,6 +85,7 @@ public class cucaInfo {
         String content = null;
         URLConnection connection = null;
         Film nacitany = null;
+        link = "https://www.csfd.cz" + link + "prehled/";
         try {
           connection =  new URL(link).openConnection();
           Scanner scanner = new Scanner(connection.getInputStream());

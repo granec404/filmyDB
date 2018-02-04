@@ -95,6 +95,7 @@ public class cucaInfo {
         if (content != null) {
             nacitany = new Film();
             nacitany.setLink(link);
+            nacitany.setContent(content);
             int pos1 = 0;
             int pos2 = 0;
             int posPom = 0;

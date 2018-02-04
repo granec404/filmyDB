@@ -21,7 +21,17 @@ public class Film {
     private ArrayList<String> krajina = new ArrayList<String>();
     private ArrayList<String> zaner = new ArrayList<String>();
     private int minutaz = 0;
+private String content="";
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
+    
     public int getMinutaz() {
         return minutaz;
     }

@@ -139,7 +139,8 @@ private String content="";
     }
 
     public void setKrajina(String krajiny) {
-        this.krajina = (ArrayList<String>) Arrays.asList(krajiny.split("\\s*,\\s*"));
+        this.krajina = new ArrayList<String>();
+        this.krajina.addAll(Arrays.asList(krajiny.split("\\s*,\\s*")));
     }
 
     public ArrayList<String> getZanerList() {

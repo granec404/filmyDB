@@ -91,6 +91,7 @@ public class cucaInfo {
           Scanner scanner = new Scanner(connection.getInputStream());
           scanner.useDelimiter("\\Z");
           content = scanner.next();
+          content = connection.getContentEncoding() + " --- " + content;
         }catch ( Exception ex ) {
         }
         if (content != null) {

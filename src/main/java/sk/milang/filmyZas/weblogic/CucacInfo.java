@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sk.milang.weblogic;
+package sk.milang.filmyZas.weblogic;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -22,7 +22,7 @@ import javax.ejb.Stateless;
  * @author milan
  */
 @Stateless
-public class cucaInfo {
+public class CucacInfo {
     HashMap<String, String> x = null;
     List<Film> list = null;
     private String obsaznik = "";

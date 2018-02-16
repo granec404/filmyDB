@@ -1,3 +1,5 @@
+package sk.milang.filmyZas.controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,8 +12,8 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
-import sk.milang.weblogic.Film;
-import sk.milang.weblogic.cucaInfo;
+import sk.milang.filmyZas.weblogic.Film;
+import sk.milang.filmyZas.weblogic.CucacInfo;
 
 /**
  *
@@ -27,7 +29,7 @@ public class NovyBean implements Serializable {
     private Film film = new Film();
     private List<Film> vysledkyHladania = null;
     @Inject
-    cucaInfo ejb;
+    CucacInfo ejb;
 
     public String getZvoleny() {
         return zvoleny;

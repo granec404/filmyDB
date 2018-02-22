@@ -6,6 +6,7 @@
 package sk.milang.filmyZas.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Film.najdiVsetky", query = "SELECT f FROM Film f"),
     @NamedQuery(name = "Film.najdiId", query = "SELECT f FROM Film f WHERE f.id = :id"),
     @NamedQuery(name = "Film.najdiNazov", query = "SELECT f FROM Film f WHERE f.nazov LIKE :nazov"),
-    @NamedQuery(name = "Film.najdiPokrocile", query = "SELECT f FROM Film f, Herec h, Zaner z, Krajina k WHERE f.nazov LIKE :nazov AND (f.rok >= :rok AND f.rok <= :rok) AND (f.minutaz >= :minutaz AND f.minutaz <= :minutaz) AND h.meno LIKE :herec AND z.nazov LIKE :zaner AND k.nazov LIKE :krajina ")})
+    @NamedQuery(name = "Film.najdiPokrocile", query = "SELECT f FROM Film f, Herec h, Zaner z, Krajina k WHERE lower(trim(f.nazov)) LIKE lower(trim(:nazov)) AND (f.rok >= :rok AND f.rok <= :rok) AND (f.minutaz >= :minutaz AND f.minutaz <= :minutaz) AND lower(trim(h.meno)) LIKE lower(trim(:herec)) AND lower(trim(z.nazov)) LIKE lower(trim(:zaner)) AND lower(trim(k.nazov)) LIKE lower(trim(:krajina)) ")})
 public class Film implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -120,6 +121,13 @@ public class Film implements Serializable {
     public void setHerecList(List<Herec> herecList) {
         this.herecList = herecList;
     }
+    
+    public void addHerec(Herec h) {
+        if (this.herecList==null) {
+            this.herecList = new ArrayList<Herec>();
+        }
+        this.herecList.add(h);
+    }
 
     public List<Zaner> getZanerList() {
         return zanerList;
@@ -128,6 +136,13 @@ public class Film implements Serializable {
     public void setZanerList(List<Zaner> zanerList) {
         this.zanerList = zanerList;
     }
+    
+    public void addZaner(Zaner z) {
+        if (this.zanerList==null) {
+            this.zanerList = new ArrayList<Zaner>();
+        }
+        this.zanerList.add(z);
+    }
 
     public List<Krajina> getKrajinaList() {
         return krajinaList;
@@ -135,6 +150,13 @@ public class Film implements Serializable {
 
     public void setKrajinaList(List<Krajina> krajinaList) {
         this.krajinaList = krajinaList;
+    }
+    
+    public void addKrajina(Krajina k) {
+        if (this.krajinaList==null) {
+            this.krajinaList = new ArrayList<Krajina>();
+        }
+        this.krajinaList.add(k);
     }
 
     @Override

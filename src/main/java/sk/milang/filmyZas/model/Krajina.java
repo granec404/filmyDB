@@ -13,12 +13,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author fskgranam
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Krajina.najdiVsetky", query = "SELECT k FROM Krajina k"),
+    @NamedQuery(name = "Krajina.najdiKrajinu", query = "SELECT k FROM Krajina k WHERE lower(trim(k.nazov)) = lower(trim(:nazov))")
+})
 public class Krajina implements Serializable {
 
     private static final long serialVersionUID = 1L;

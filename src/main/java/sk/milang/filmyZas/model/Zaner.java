@@ -13,12 +13,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author fskgranam
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Zaner.najdiVsetky", query = "SELECT z FROM Zaner z"),
+    @NamedQuery(name = "Zaner.najdiZaner", query = "SELECT z FROM Zaner z WHERE lower(trim(z.nazov)) = lower(trim(:nazov))")
+})
 public class Zaner implements Serializable {
 
     private static final long serialVersionUID = 1L;

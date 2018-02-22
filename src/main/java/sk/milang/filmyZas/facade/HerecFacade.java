@@ -5,8 +5,11 @@
  */
 package sk.milang.filmyZas.facade;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import sk.milang.filmyZas.model.Herec;
 
@@ -26,5 +29,14 @@ public class HerecFacade extends AbstractFacade<Herec> {
 
     public HerecFacade() {
         super(Herec.class);
+    }
+    
+    public Herec najdiHercaPodlaMena(String meno) {
+        List<Herec> results = em.createNamedQuery("Herec.najdiMeno").setParameter("meno", meno).getResultList();
+        if (results.isEmpty()) {
+            return null;
+        } else {
+            return results.get(0);
+        }
     }
 }

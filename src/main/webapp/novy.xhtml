@@ -8,11 +8,11 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="content">
         <br />
-        <h1>Nahadzovanie nových filmov</h1>
+        <h1>Pridávanie nových filmov</h1>
         <br />
         
         <h:form>
-            <h:inputText value="${novyBean.search}" label="Zadaj názov, alebo jeho časť">
+            <h:inputText value="#{novyBean.search}" label="Zadaj názov, alebo jeho časť">
             </h:inputText>
             <h:commandButton value="Hľadaj" action="#{novyBean.zrobHladanie}" label="Hľadaj" />
         </h:form>
@@ -23,7 +23,7 @@
             <h:form>
                 <p:panelGrid columns="3">
                     <p:outputLabel value="Výsledky:"/>
-                    <h:selectOneListbox value="${novyBean.zvoleny}">
+                    <h:selectOneListbox value="#{novyBean.zvoleny}">
                         <f:selectItems value="#{novyBean.vysledkyHladania}" var="entry" actionListener="" itemLabel="#{entry.getNazovRok()}" itemValue="#{entry.link}" />
                     </h:selectOneListbox>
                     <p:commandButton value="Natiahni" action="#{novyBean.natiahniUdaje}" label="Natiahni" />
@@ -31,36 +31,38 @@
             </h:form>
         </h:panelGroup>
         
-        <h:form>
+        <h:form rendered="#{novyBean.mameVysledky}">
             <p:panelGrid columns="2">
                 <p:outputLabel>Názov:</p:outputLabel>
-                <p:inputText value="${novyBean.film.nazov}"/>
+                <p:inputText value="#{novyBean.film.nazov}"/>
                 
                 <p:outputLabel>Rok:</p:outputLabel>
-                <p:inputText value="${novyBean.film.rok}"/>
+                <p:inputText value="#{novyBean.film.rok}"/>
                 
                 <p:outputLabel>Dĺžka (minutáž):</p:outputLabel>
-                <p:inputText value="${novyBean.film.minutaz}"/>
+                <p:inputText value="#{novyBean.film.minutaz}"/>
                 
                 <p:outputLabel>Herci:</p:outputLabel>
-                <p:inputText value="${novyBean.film.herci}"/>
+                <p:inputText value="#{novyBean.film.herci}"/>
                 
                 <p:outputLabel>Krajina:</p:outputLabel>
-                <p:inputText value="${novyBean.film.krajina}"/>
+                <p:inputText value="#{novyBean.film.krajina}"/>
                 
                 <p:outputLabel>Žáner:</p:outputLabel>
-                <p:inputText value="${novyBean.film.zaner}"/>
+                <p:inputText value="#{novyBean.film.zaner}"/>
                 
                 <p:outputLabel>Alt. názvy:</p:outputLabel>
-                <p:inputText value="${novyBean.film.altNazvy}"/>
+                <p:inputText value="#{novyBean.film.altNazvy}"/>
                 
                 <p:outputLabel>ČSFD link:</p:outputLabel>
-                <p:inputText value="${novyBean.film.link}"/>
+                <p:inputText value="#{novyBean.film.link}"/>
                 
                 <p:outputLabel>special:</p:outputLabel>
-                <!--<p:inputText value="${novyBean.film.content}"/>-->
-                <p:inputTextarea value="${novyBean.film.content}"/>
+                <!--<p:inputText value="#{novyBean.film.content}"/>-->
+                <p:inputTextarea value="#{novyBean.film.content}"/>
             </p:panelGrid>
+            
+            <h:commandButton value="Zaloz" action="#{novyBean.zalozFilm}" label="Založ do databázy" />
         </h:form>
         
     </ui:define>

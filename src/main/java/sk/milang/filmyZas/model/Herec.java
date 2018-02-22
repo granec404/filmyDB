@@ -13,12 +13,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author fskgranam
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Herec.najdiVsetkych", query = "SELECT h FROM Herec h"),
+    @NamedQuery(name = "Herec.najdiMeno", query = "SELECT h FROM Herec h WHERE lower(trim(h.meno)) = lower(trim(:meno))")
+})
 public class Herec implements Serializable {
 
     private static final long serialVersionUID = 1L;

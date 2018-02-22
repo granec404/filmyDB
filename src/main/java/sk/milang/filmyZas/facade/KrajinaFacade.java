@@ -5,6 +5,7 @@
  */
 package sk.milang.filmyZas.facade;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,5 +27,14 @@ public class KrajinaFacade extends AbstractFacade<Krajina> {
 
     public KrajinaFacade() {
         super(Krajina.class);
+    }
+    
+    public Krajina najdiKrajinuPodlaNazvu(String nazov) {
+        List<Krajina> results = em.createNamedQuery("Krajina.najdiKrajinu").setParameter("nazov", nazov).getResultList();
+        if (results.isEmpty()) {
+            return null;
+        } else {
+            return results.get(0);
+        }
     }
 }

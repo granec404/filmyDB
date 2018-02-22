@@ -5,6 +5,7 @@
  */
 package sk.milang.filmyZas.facade;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,5 +27,14 @@ public class ZanerFacade extends AbstractFacade<Zaner> {
 
     public ZanerFacade() {
         super(Zaner.class);
+    }
+    
+    public Zaner najdiZanerPodlaNazvu(String nazov) {
+        List<Zaner> results = em.createNamedQuery("Zaner.najdiZaner").setParameter("nazov", nazov).getResultList();
+        if (results.isEmpty()) {
+            return null;
+        } else {
+            return results.get(0);
+        }
     }
 }

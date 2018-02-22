@@ -12,6 +12,8 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
+import sk.milang.filmyZas.facade.FilmFacade;
+import sk.milang.filmyZas.model.Film;
 import sk.milang.filmyZas.weblogic.FilmWebTemp;
 import sk.milang.filmyZas.weblogic.CucacInfo;
 
@@ -30,6 +32,8 @@ public class NovyBean implements Serializable {
     private List<FilmWebTemp> vysledkyHladania = null;
     @Inject
     CucacInfo ejb;
+    @Inject
+    FilmFacade filmDB;
 
     public String getZvoleny() {
         return zvoleny;
@@ -108,6 +112,25 @@ public class NovyBean implements Serializable {
     public void zrobHladanie() {
         ejb.zrobHladanie(search);
         vysledkyHladania = ejb.nacitajZoznam(search);
+    }
+    
+    public boolean zalozFilm() {
+        Film novy = filmDB.createFromObject(film);
+        if (novy==null) {
+            return false;
+        } else {
+            vynuluj();
+        }
+        return true;
+    }
+    
+    public void vynuluj() {
+        search = "";
+        obsah = "";
+        log = "";
+        zvoleny = "";
+        film = new FilmWebTemp();
+        vysledkyHladania = null;
     }
     
 }

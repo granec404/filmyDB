@@ -10,6 +10,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import sk.milang.filmyZas.model.Film;
+import sk.milang.filmyZas.model.Herec;
+import sk.milang.filmyZas.model.Krajina;
+import sk.milang.filmyZas.model.Zaner;
 import sk.milang.filmyZas.weblogic.FilmWebTemp;
 
 /**
@@ -21,6 +24,9 @@ import sk.milang.filmyZas.weblogic.FilmWebTemp;
 public class FilmFacade extends AbstractFacade<Film> {
     @PersistenceContext(unitName = "FilmyPU")
     private EntityManager em;
+    private HerecFacade herecF = new HerecFacade();
+    private ZanerFacade zanerF = new ZanerFacade();
+    private KrajinaFacade krajinaF = new KrajinaFacade();
 
     @Override
     protected EntityManager getEntityManager() {
@@ -43,10 +49,43 @@ public class FilmFacade extends AbstractFacade<Film> {
         novy.setLink(obj.getLink());
         List<String> zoznam = obj.getHerciList();
         if (zoznam != null && !zoznam.isEmpty()) {
-            for (String herec : zoznam) {
-                
+            for (String herecStr : zoznam) {
+                Herec h = herecF.najdiHercaPodlaMena(herecStr);
+                if (h==null) {
+                    h = new Herec();
+                    h.setMeno(herecStr);
+                    herecF.create(h);
+                }
+                novy.addHerec(h);
             }
         }
-        return null;
+        
+        zoznam = obj.getZanerList();
+        if (zoznam != null && !zoznam.isEmpty()) {
+            for (String zanerStr : zoznam) {
+                Zaner z = zanerF.najdiZanerPodlaNazvu(zanerStr);
+                if (z==null) {
+                    z = new Zaner();
+                    z.setNazov(zanerStr);
+                    zanerF.create(z);
+                }
+                novy.addZaner(z);
+            }
+        }
+        
+        zoznam = obj.getKrajinaList();
+        if (zoznam != null && !zoznam.isEmpty()) {
+            for (String krajinaStr : zoznam) {
+                Krajina k = krajinaF.najdiKrajinuPodlaNazvu(krajinaStr);
+                if (k==null) {
+                    k = new Krajina();
+                    k.setNazov(krajinaStr);
+                    krajinaF.create(k);
+                }
+                novy.addKrajina(k);
+            }
+        }
+        create(novy);
+        return novy;
     }
 }

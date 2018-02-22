@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author milan
  */
-public class Film {
+public class FilmWebTemp {
     private String nazov = "";
     private String link = "";
     private int rok = 0;
@@ -103,9 +103,17 @@ private String content="";
     }
 
     public String getAltNazvy() {
+        return getAltNazvyAsString(altNazvy);
+    }
+    
+    public static List<String> getAltNazvyAsList(String nazvy) {
+        return Arrays.asList(nazvy.split("\\s*,\\s*"));
+    }
+    
+    public static String getAltNazvyAsString(List<String> nazvy) {
         String r = "";
-        if (altNazvy!=null && altNazvy.size()>0) {
-            for (String alt : altNazvy) {
+        if (nazvy!=null && nazvy.size()>0) {
+            for (String alt : nazvy) {
                 r = r + (r.isEmpty() ? "" : " / ") + alt;
             }
         }
@@ -117,7 +125,7 @@ private String content="";
     }
 
     public void setAltNazvy(String nazvy) {
-        this.altNazvy = Arrays.asList(nazvy.split("\\s*,\\s*"));
+        this.altNazvy = getAltNazvyAsList(nazvy);
     }
 
     public List<String> getKrajinaList() {

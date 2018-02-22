@@ -6,10 +6,13 @@
 package sk.milang.filmyZas.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -21,7 +24,12 @@ public class Herec implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "Meno")
+    private String meno="";
+    @ManyToMany(mappedBy = "herecList")
+    private List<Film> filmList;
 
     public Long getId() {
         return id;
@@ -29,6 +37,22 @@ public class Herec implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Film> getFilmList() {
+        return filmList;
+    }
+
+    public void setFilmList(List<Film> filmList) {
+        this.filmList = filmList;
+    }
+
+    public String getMeno() {
+        return meno;
+    }
+
+    public void setMeno(String meno) {
+        this.meno = meno;
     }
 
     @Override

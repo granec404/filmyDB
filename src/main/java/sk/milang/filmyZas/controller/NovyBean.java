@@ -12,7 +12,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.inject.Inject;
-import sk.milang.filmyZas.weblogic.Film;
+import sk.milang.filmyZas.weblogic.FilmWebTemp;
 import sk.milang.filmyZas.weblogic.CucacInfo;
 
 /**
@@ -26,8 +26,8 @@ public class NovyBean implements Serializable {
     private String obsah = "";
     private String log = "";
     private String zvoleny = "";
-    private Film film = new Film();
-    private List<Film> vysledkyHladania = null;
+    private FilmWebTemp film = new FilmWebTemp();
+    private List<FilmWebTemp> vysledkyHladania = null;
     @Inject
     CucacInfo ejb;
 
@@ -39,11 +39,11 @@ public class NovyBean implements Serializable {
         this.zvoleny = zvoleny;
     }
 
-    public Film getFilm() {
+    public FilmWebTemp getFilm() {
         return film;
     }
 
-    public void setFilm(Film film) {
+    public void setFilm(FilmWebTemp film) {
         this.film = film;
     }
 
@@ -85,11 +85,11 @@ public class NovyBean implements Serializable {
         return (vysledkyHladania!=null && vysledkyHladania.size()>0);
     }
     
-    public List<Film> getVysledkyHladania() {
+    public List<FilmWebTemp> getVysledkyHladania() {
         return vysledkyHladania;
     }
     
-    public void setVysledkyHladania(List<Film> x) {
+    public void setVysledkyHladania(List<FilmWebTemp> x) {
         vysledkyHladania = x;
     }
     

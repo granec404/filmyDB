@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css"/>
+        <ui:insert name="script">
+        </ui:insert>
+        <title>Filmy DB</title>
+    </h:head>
+
+    <h:body>
+        <h:outputScript name="scripts/scripts.js" target="head" />
+        <p:layoutUnit position="top" resizable="false">  
+            <ui:insert name="top">
+                <!--<h:graphicImage alt="Logo" library="images" name="logo.jpg" style="margin: 13px"/>-->
+
+                <p:ajaxStatus onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+
+                <p:dialog position="top" style="margin-top: 150px; text-align: center;" widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                    <div>Načítavam...</div>
+                    <p:graphicImage library="images" name="ajax-loader.gif" />
+                </p:dialog>      
+
+                <h:panelGrid style="width: 100%;">
+                    <p:menubar>
+                        <p:menuitem value="Založiť nový" url="/faces/novy.xhtml" />
+<!--                        <p:submenu label="Tyzdnove planovanie">
+                            <p:submenu label="Management">
+                                <p:menuitem value="FDCs" url="/faces/FDCs.xhtml" />
+                                <p:menuitem value="Packing Groups" url="/faces/packingGroups.xhtml" />
+                                <p:menuitem value="Ship to" url="#" />
+                                <p:menuitem value="Typ palety" url="#" />
+                                <p:menuitem value="Material" url="#" />
+                                <p:menuitem value="Cut of dattes" url="#" />
+                            </p:submenu>
+                            <p:menuitem value="Advanced SO" url="#" />
+                        </p:submenu>-->  
+                    </p:menubar>
+                </h:panelGrid>
+                <p:separator/>
+            </ui:insert>
+        </p:layoutUnit>
+        <div id="content">
+            <ui:insert name="content">
+                <!--<h:outputText value="Your session has expired" rendered="#{param.reason == 'expired'}"/>-->
+            </ui:insert>
+        </div>
+        <p:dialog id="progressDialogId" widgetVar="progressDialog"  position="top" header="Processing..." closable="false" width="150">
+            <h:form id="progressForm">
+                <h:panelGrid columns="1" style="text-align: center;margin: 0 auto;">
+                    <h:graphicImage library="images" name="ajax-loader.gif"/>
+                    <p:outputLabel value="Spracovávam..." style="font-weight: bold;"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+
+</html>

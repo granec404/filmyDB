@@ -6,10 +6,13 @@
 package sk.milang.filmyZas.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -21,7 +24,12 @@ public class Zaner implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
+    @Column(name = "Nazov")
+    private String nazov="";
+    @ManyToMany(mappedBy = "zanerList")
+    private List<Film> filmList;
 
     public Long getId() {
         return id;
@@ -31,6 +39,22 @@ public class Zaner implements Serializable {
         this.id = id;
     }
 
+    public String getNazov() {
+        return nazov;
+    }
+
+    public void setNazov(String nazov) {
+        this.nazov = nazov;
+    }
+
+    public List<Film> getFilmList() {
+        return filmList;
+    }
+
+    public void setFilmList(List<Film> filmList) {
+        this.filmList = filmList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

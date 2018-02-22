@@ -24,7 +24,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class CucacInfo {
     HashMap<String, String> x = null;
-    List<Film> list = null;
+    List<FilmWebTemp> list = null;
     private String obsaznik = "";
     
     public void zrobHladanie(String search) {
@@ -35,11 +35,11 @@ public class CucacInfo {
         return obsaznik;
     }
     
-    public List<Film> getZoznam() {
+    public List<FilmWebTemp> getZoznam() {
         return list;
     }
     
-    public List<Film> nacitajZoznam(String searchString) {
+    public List<FilmWebTemp> nacitajZoznam(String searchString) {
         String content = null;
         URLConnection connection = null;
         searchString = searchString.trim().replace(" ", "+");
@@ -51,7 +51,7 @@ public class CucacInfo {
         }catch ( Exception ex ) {
         }
         if (content != null) {
-            List<Film> retval = new ArrayList<Film>();
+            List<FilmWebTemp> retval = new ArrayList<FilmWebTemp>();
             int pos1 = 0;
             int pos2 = 0;
             int pos3 = 0;
@@ -73,7 +73,7 @@ public class CucacInfo {
                             rok = Integer.parseInt(content.substring(pos4-4, pos4));
                         } catch (Exception e) {rok=0;}
                     }
-                    Film x = new Film();
+                    FilmWebTemp x = new FilmWebTemp();
                     x.setNazov(nazov);
                     x.setLink(link);
                     x.setRok(rok);
@@ -86,10 +86,10 @@ public class CucacInfo {
         return null;
     }
 
-    public Film nacitajFilm(String link) {
+    public FilmWebTemp nacitajFilm(String link) {
         String content = null;
         URLConnection connection = null;
-        Film nacitany = null;
+        FilmWebTemp nacitany = null;
         link = "https://www.csfd.cz" + link + "prehled/";
         try {
             connection =  new URL(link).openConnection();
@@ -106,7 +106,7 @@ public class CucacInfo {
         }catch ( Exception ex ) {
         }
         if (content != null) {
-            nacitany = new Film();
+            nacitany = new FilmWebTemp();
             nacitany.setLink(link);
             nacitany.setContent(content);
             int pos1 = 0;

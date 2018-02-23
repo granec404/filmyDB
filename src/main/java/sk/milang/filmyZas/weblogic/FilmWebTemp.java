@@ -16,12 +16,12 @@ public class FilmWebTemp {
     private String nazov = "";
     private String link = "";
     private int rok = 0;
-    private List<String> herci = new ArrayList<String>();
-    private List<String> altNazvy = new ArrayList<String>();
-    private List<String> krajina = new ArrayList<String>();
-    private List<String> zaner = new ArrayList<String>();
+    private List<String> herci = new ArrayList<>();
+    private List<String> altNazvy = new ArrayList<>();
+    private List<String> krajina = new ArrayList<>();
+    private List<String> zaner = new ArrayList<>();
     private int minutaz = 0;
-private String content="";
+    private String content="";
 
     public String getContent() {
         return content;

@@ -6,6 +6,6 @@ and open the template in the editor.
 -->
 
 
-<jboss-web>
-    <context-root>/</context-root>
-</jboss-web>
+<glassfish-web-app>
+    <context-root>/filmy</context-root>
+</glassfish-web-app>

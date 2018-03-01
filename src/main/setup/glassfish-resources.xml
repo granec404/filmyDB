@@ -5,9 +5,9 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="3306"/>
         <property name="databaseName" value="filmydb"/>
-        <property name="User" value="user2IQ"/>
-        <property name="Password" value="kAmKPwQt2MXobGRV"/>
-        <property name="URL" value="jdbc:mysql://127.0.0.1"/>
+        <property name="User" value="root"/>
+        <property name="Password" value="m4gnum"/>
+        <property name="URL" value="jdbc:mysql://127.0.0.1/filmydb"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="jdbc/FilmyPool" object-type="user" pool-name="FilmyPool"/>         
+    <jdbc-resource enabled="true" pool-name="FilmyPool" jndi-name="jdbc/__FilmyPool" object-type="user"/>         
 </resources>

@@ -15,12 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author fskgranam
  */
 @Entity
+@Table(name = "Herec")
 @NamedQueries({
     @NamedQuery(name = "Herec.najdiVsetkych", query = "SELECT h FROM Herec h"),
     @NamedQuery(name = "Herec.najdiMeno", query = "SELECT h FROM Herec h WHERE lower(trim(h.meno)) = lower(trim(:meno))")

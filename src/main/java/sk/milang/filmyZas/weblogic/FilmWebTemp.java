@@ -95,7 +95,7 @@ public class FilmWebTemp {
     }
 
     public void setHerci(String herci) {
-        this.herci = Arrays.asList(herci.split("\\s*,\\s*"));
+        this.herci = Arrays.asList(herci.split("\\s*/\\s*"));
     }
 
     public List<String> getAltNazvyList() {
@@ -107,7 +107,7 @@ public class FilmWebTemp {
     }
     
     public static List<String> getAltNazvyAsList(String nazvy) {
-        return Arrays.asList(nazvy.split("\\s*,\\s*"));
+        return Arrays.asList(nazvy.split("\\s*/\\s*"));
     }
     
     public static String getAltNazvyAsString(List<String> nazvy) {
@@ -147,7 +147,7 @@ public class FilmWebTemp {
     }
 
     public void setKrajina(String krajiny) {
-        this.krajina = Arrays.asList(krajiny.split("\\s*,\\s*"));
+        this.krajina = Arrays.asList(krajiny.split("\\s*/\\s*"));
     }
 
     public List<String> getZanerList() {

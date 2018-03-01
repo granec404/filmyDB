@@ -45,7 +45,7 @@ public class CucacInfo {
         searchString = searchString.trim().replace(" ", "+");
         try {
           connection =  new URL("https://www.csfd.cz/hledat/?q="+searchString).openConnection();
-          Scanner scanner = new Scanner(connection.getInputStream());
+          Scanner scanner = new Scanner(connection.getInputStream(), "UTF-8");
           scanner.useDelimiter("\\Z");
           content = scanner.next();
         }catch ( Exception ex ) {
@@ -99,9 +99,10 @@ public class CucacInfo {
             } else {
                 instr = new InflaterInputStream(connection.getInputStream(),new Inflater(true));
             }
-            Scanner scanner = new Scanner(instr);
+            Scanner scanner = new Scanner(instr, "UTF-8");
             scanner.useDelimiter("\\Z");
             content = scanner.next();
+            System.out.println("Encoding: "+connection.getContentEncoding());
             content = connection.getContentEncoding() + " --- " + content;
         }catch ( Exception ex ) {
         }
@@ -121,6 +122,27 @@ public class CucacInfo {
                     posPom = pos2;
                 }
             }
+            
+            // ALT NAZVY
+            List<String> alt = new ArrayList<String>();
+            pos1 = content.indexOf("<ul class=\"names\">", posPom);
+            if (pos1>0) {
+                pos2 = content.indexOf("</ul>", pos1);
+                if (pos2>0) {
+                    posPom = pos2;
+                    String nazvy = content.substring(pos1+18, pos2);
+                    pos1=0; pos2=0;
+                    while (nazvy.indexOf("<h3>", pos1)>0) {
+                        pos1 = nazvy.indexOf("<h3>", pos1);
+                        pos2 = nazvy.indexOf("</h3>", pos1);
+                        if (pos1 > 0 && pos2 >0) {
+                            alt.add(nazvy.substring(pos1+4, pos2).trim());
+                        }
+                        pos1 = pos1+1;
+                    }
+                    nacitany.setAltNazvyList(alt);
+                }
+            }
 
             // ZANRE
             pos1 = content.indexOf("<p class=\"genre\">");
@@ -135,7 +157,7 @@ public class CucacInfo {
             // KRAJINY
             pos1 = content.indexOf("<p class=\"origin\">");
             if (pos1>0) {
-                pos2 = content.indexOf("</p>", pos1);
+                pos2 = content.indexOf("<span itemprop=\"dateCreated\">", pos1);
                 if (pos2>0) {
                     String krajiny = content.substring(pos1+18, pos2).replace(",", "");
                     nacitany.setKrajina(krajiny);
@@ -157,32 +179,11 @@ public class CucacInfo {
                     if (pos1 > 0 && pos2 > 0) {
                         int minutaz = 0;
                         try {
-                            minutaz = Integer.parseInt(content.substring(pos1+8, pos2).replace("min", ""));
-                        } catch (Exception e) {}
+                            System.out.println("Minutaz parse " + content.substring(pos1+8, pos2));
+                            minutaz = Integer.parseInt(content.substring(pos1+8, pos2).replace("min", "").trim());
+                        } catch (Exception e) {System.out.println(e.getStackTrace());}
                         nacitany.setMinutaz(minutaz);
                     }
-                }
-            }
-            
-
-            // ALT NAZVY
-            List<String> alt = new ArrayList<String>();
-            pos1 = content.indexOf("<ul class=\"names\">", posPom);
-            if (pos1>0) {
-                pos2 = content.indexOf("</ul>", pos1);
-                if (pos2>0) {
-                    posPom = pos2;
-                    String nazvy = content.substring(pos1+18, pos2);
-                    pos1=0; pos2=0;
-                    while (nazvy.indexOf("<h3>", pos1)>0) {
-                        pos1 = nazvy.indexOf("<h3>", pos1);
-                        pos2 = nazvy.indexOf("</h3>", pos1);
-                        if (pos1 > 0 && pos2 >0) {
-                            alt.add(nazvy.substring(pos1+3, pos2).trim());
-                        }
-                        pos1 = pos1+1;
-                    }
-                    nacitany.setAltNazvyList(alt);
                 }
             }
             
@@ -190,15 +191,18 @@ public class CucacInfo {
             List<String> h = new ArrayList<String>();
             pos1 = content.indexOf("<h4>Hrají:</h4>", posPom);
             if (pos1>0) {
+                System.out.println("Nasli sme h4 herci");
                 pos2 = content.indexOf("</span>", pos1);
                 if (pos2>0) {
                     posPom = pos2;
                     String herci = content.substring(pos1, pos2);
                     pos1=0; pos2=0;
                     while (herci.indexOf("</a>", pos2)>0) {
+                        System.out.println("herci cycle");
                         pos2 = herci.indexOf("</a>", pos2);     // tu hladam najprv koniec
                         pos1 = herci.lastIndexOf(">", pos2);    // a odneho zaciatok
                         if (pos1 > 0 && pos2 >0) {
+                            System.out.println("najdeny herec "+herci.substring(pos1+1, pos2).trim());
                             h.add(herci.substring(pos1+1, pos2).trim());
                         }
                         pos2 = pos2+1;

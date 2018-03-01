@@ -37,12 +37,7 @@ public abstract class AbstractFacade<T> {
      */
     public void create(T entity) {
         EntityManager em = getEntityManager();
-        EntityTransaction entityTransaction = em.getTransaction();
-        entityTransaction.begin();
         em.persist(entity);
-        entityTransaction.commit();
-        em.close();
-
     }
 
     /**
@@ -51,86 +46,38 @@ public abstract class AbstractFacade<T> {
      * @param entity
      */
     public void edit(T entity) {
-        EntityManager em = getEntityManager();
-        EntityTransaction entityTransaction = em.getTransaction();
-        entityTransaction.begin();
-        em.merge(entity);
-        em.flush();
-        entityTransaction.commit();
-        em.close();
+        getEntityManager().merge(entity);
     }
 
-    /**
-     * Removes given entity from database.
-     *
-     * @param entity
-     */
     public void remove(T entity) {
-        EntityManager em = getEntityManager();
-        EntityTransaction entityTransaction = em.getTransaction();
-        entityTransaction.begin();
-        em.remove(em.merge(entity));
-        entityTransaction.commit();
-        em.close();
-    }
+        getEntityManager().remove(getEntityManager().merge(entity));
+    }   
 
-    /**
-     * Finds entity with given id in database and returns it.
-     *
-     * @param entity
-     */
     public T find(Object id) {
-        EntityManager em = getEntityManager();
-        T result = em.find(entityClass, id);
-        em.close();
-        return result;
+        return getEntityManager().find(entityClass, id);
     }
 
-    /**
-     * Returns all records persisted in database as a List.
-     *
-     * @param list of all records
-     */
     public List<T> findAll() {
-        EntityManager em = getEntityManager();
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        List<T> result = em.createQuery(cq).getResultList();
-        em.close();
-        return result;
+        return getEntityManager().createQuery(cq).getResultList();
     }
 
-    /**
-     * Returns a range of records persisted in database as a List.
-     *
-     * @return list of records
-     */
     public List<T> findRange(int[] range) {
-        EntityManager em = getEntityManager();
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        javax.persistence.Query q = em.createQuery(cq);
-        q.setMaxResults(range[1] - range[0]);
+        javax.persistence.Query q = getEntityManager().createQuery(cq);
+        q.setMaxResults(range[1] - range[0] + 1);
         q.setFirstResult(range[0]);
-        List<T> result = q.getResultList();
-        em.close();
-        return result;
+        return q.getResultList();
     }
 
-    /**
-     * Returns number of records persisted in database.
-     *
-     * @return number of records
-     */
     public int count() {
-        EntityManager em = getEntityManager();
-        javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = em.createQuery(cq);
-        int result = ((Long) q.getSingleResult()).intValue();
-        em.close();
-        return result;
+        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
+        javax.persistence.Query q = getEntityManager().createQuery(cq);
+        return ((Long) q.getSingleResult()).intValue();
     }
 }
 

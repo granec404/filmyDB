@@ -6,8 +6,10 @@
 package sk.milang.filmyZas.facade;
 
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import sk.milang.filmyZas.model.Film;
 import sk.milang.filmyZas.model.Herec;
@@ -24,8 +26,11 @@ import sk.milang.filmyZas.weblogic.FilmWebTemp;
 public class FilmFacade extends AbstractFacade<Film> {
     @PersistenceContext(unitName = "FilmyPU")
     private EntityManager em;
+    @EJB
     private HerecFacade herecF = new HerecFacade();
+    @EJB
     private ZanerFacade zanerF = new ZanerFacade();
+    @EJB
     private KrajinaFacade krajinaF = new KrajinaFacade();
 
     @Override

@@ -8,6 +8,7 @@ package sk.milang.filmyZas.controller;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 //import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -32,7 +33,7 @@ public class NovyBean implements Serializable {
     private List<FilmWebTemp> vysledkyHladania = null;
     @Inject
     CucacInfo ejb;
-    @Inject
+    @EJB
     FilmFacade filmDB;
 
     public String getZvoleny() {
@@ -86,6 +87,7 @@ public class NovyBean implements Serializable {
 //        mameVysledky = !(obsah.isEmpty());
 //        return mameVysledky;
 //        pripisLog("mame?: "+String.valueOf(vysledkyHladania!=null && vysledkyHladania.size()>0));
+        System.out.println("Mame nejake vysledky? "+(vysledkyHladania!=null ? vysledkyHladania.size() : "null"));
         return (vysledkyHladania!=null && vysledkyHladania.size()>0);
     }
     
@@ -101,17 +103,19 @@ public class NovyBean implements Serializable {
         if (zvoleny==null || zvoleny.isEmpty()) {
             return;
         }
-        setLog("ideme natiahnut link "+zvoleny);
+        System.out.println("ideme natiahnut link "+zvoleny);
         film = ejb.nacitajFilm(zvoleny);
         if (film!=null) {
-            setLog("film nie je null "+film.getNazov());
+            System.out.println("film nie je null "+film.getNazov());
         }
         return;
     }
     
     public void zrobHladanie() {
+        System.out.println("hladame...");
         ejb.zrobHladanie(search);
         vysledkyHladania = ejb.nacitajZoznam(search);
+        System.out.println("koniec hladania "+(vysledkyHladania==null ? "null" : String.valueOf(vysledkyHladania.size())));
     }
     
     public boolean zalozFilm() {

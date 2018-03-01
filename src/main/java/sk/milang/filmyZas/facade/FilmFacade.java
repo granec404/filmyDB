@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sk.milang.filmyZas.model.Film;
 import sk.milang.filmyZas.model.Herec;
 import sk.milang.filmyZas.model.Krajina;
@@ -40,6 +41,27 @@ public class FilmFacade extends AbstractFacade<Film> {
 
     public FilmFacade() {
         super(Film.class);
+    }
+    
+    public List<Film> najdiFilmy(String nazov, int rok, int minOd, int minDo, String zaner, String herec, String krajina) {
+        int rokOd=0;
+        int rokDo=9999;
+        if (rok>0) {
+            rokOd=rok;
+            rokDo=rok;
+        }
+        nazov = nazov.isEmpty()?"%":"%"+nazov.trim()+"%";
+        zaner = (zaner==null || zaner.isEmpty())?"%":"%"+zaner.trim()+"%";
+        herec = herec.isEmpty()?"%":"%"+herec.trim()+"%";
+        krajina = krajina.isEmpty()?"%":"%"+krajina.trim()+"%";
+//        Query q = em.createNamedQuery("Film.najdiPokrocile").setParameter("nazov", nazov).setParameter("rokOd", rokOd).setParameter("rokDo", rokDo).setParameter("minutazOd", minOd).setParameter("minutazDo", minDo).setParameter("zaner", zaner).setParameter("herec", herec).setParameter("krajina", krajina);
+//        System.out.println("Kvera: "+q.toString());
+        List<Film> results = em.createNamedQuery("Film.najdiPokrocile").setParameter("nazov", nazov).setParameter("rokOd", rokOd).setParameter("rokDo", rokDo).setParameter("minutazOd", minOd).setParameter("minutazDo", minDo).setParameter("zaner", zaner).setParameter("herec", herec).setParameter("krajina", krajina).getResultList();
+        if (results==null || results.size()==0) {
+            return null;
+        }
+        System.out.println("Mame vysledkov: "+results.size());
+        return results;
     }
     
     public Film createFromObject(FilmWebTemp obj) {

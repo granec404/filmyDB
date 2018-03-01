@@ -35,7 +35,6 @@ public class HerecFacade extends AbstractFacade<Herec> {
     }
     
     public Herec najdiHercaPodlaMena(String meno) {
-        System.out.println("Ideme s "+meno+" a "+(em==null?"em null!":"em OK"));
         Query q = em.createNamedQuery("Herec.najdiMeno").setParameter("meno", meno);
         List<Herec> results = q.getResultList();
         if (results.isEmpty()) {

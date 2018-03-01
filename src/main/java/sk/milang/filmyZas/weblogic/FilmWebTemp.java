@@ -169,7 +169,7 @@ public class FilmWebTemp {
     }
     
     public void setZaner(String zanre) {
-        this.zaner = Arrays.asList(zanre.split("\\s*,\\s*"));
+        this.zaner = Arrays.asList(zanre.split("\\s*/\\s*"));
     }
     
 }

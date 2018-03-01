@@ -30,7 +30,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Film.najdiVsetky", query = "SELECT f FROM Film f"),
     @NamedQuery(name = "Film.najdiId", query = "SELECT f FROM Film f WHERE f.id = :id"),
     @NamedQuery(name = "Film.najdiNazov", query = "SELECT f FROM Film f WHERE f.nazov LIKE :nazov"),
-    @NamedQuery(name = "Film.najdiPokrocile", query = "SELECT f FROM Film f, Herec h, Zaner z, Krajina k WHERE lower(trim(f.nazov)) LIKE lower(trim(:nazov)) AND (f.rok >= :rok AND f.rok <= :rok) AND (f.minutaz >= :minutaz AND f.minutaz <= :minutaz) AND lower(trim(h.meno)) LIKE lower(trim(:herec)) AND lower(trim(z.nazov)) LIKE lower(trim(:zaner)) AND lower(trim(k.nazov)) LIKE lower(trim(:krajina)) ")})
+    @NamedQuery(name = "Film.najdiPokrocile", query = "SELECT f FROM Film f WHERE (lower(trim(f.nazov)) LIKE lower(trim(:nazov)) OR lower(trim(f.altNazvy)) LIKE lower(trim(:nazov))) AND (f.rok >= :rokOd AND f.rok <= :rokDo) AND (f.minutaz >= :minutazOd AND f.minutaz <= :minutazDo) AND lower(trim(f.herecList.meno)) LIKE lower(trim(:herec)) AND lower(trim(f.zanerList.nazov)) LIKE lower(trim(:zaner)) AND lower(trim(f.krajinaList.nazov)) LIKE lower(trim(:krajina)) ")})
 public class Film implements Serializable {
 
     private static final long serialVersionUID = 1L;

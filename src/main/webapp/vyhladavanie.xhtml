@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/masterpage.xhtml"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="content">
+        <br />
+        <h1>Vyhľadávanie</h1>
+        <br />
+        #{vyhladavanieBean.nacitajZanre()}
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:outputLabel>Názov:</p:outputLabel>
+                <p:inputText value="#{vyhladavanieBean.nazov}"/>
+
+                <p:outputLabel>Rok:</p:outputLabel>
+                <p:inputText value="#{vyhladavanieBean.rok}"/>
+
+                <p:outputLabel>Dĺžka (minutáž) od:</p:outputLabel>
+                <p:inputText value="#{vyhladavanieBean.minutaz1}"/>
+                
+                <p:outputLabel>Dĺžka (minutáž) do:</p:outputLabel>
+                <p:inputText value="#{vyhladavanieBean.minutaz2}"/>
+
+                <p:outputLabel>Herci:</p:outputLabel>
+                <p:inputText value="#{vyhladavanieBean.herec}"/>
+
+                <p:outputLabel>Krajina:</p:outputLabel>
+                <p:inputText value="#{vyhladavanieBean.krajina}"/>
+
+                <p:outputLabel>Žáner:</p:outputLabel>
+                <p:selectOneMenu value="#{vyhladavanieBean.zaner}">
+                    <f:selectItems value="#{vyhladavanieBean.zanre}" var="zaner" itemLabel="#{zaner}" itemValue="#{zaner}" />
+                </p:selectOneMenu>
+                
+                <p:commandButton value="Hľadaj" label="Hľadaj" action="#{vyhladavanieBean.search()}" onclick="PF('statusDialog').show();" oncomplete="PF('statusDialog').hide();" update="vysledky" />
+            </p:panelGrid>
+        </h:form>
+        
+        <h:panelGroup id="vysledky">
+            <p:dataTable id="tbl" 
+                         rendered="#{vyhladavanieBean.suVysledky}"
+                         value="#{vyhladavanieBean.filmy}"
+                         scrollable="true"
+                         rows="30"
+                         var="film"
+                         widgetVar="tabl"
+                         resizableColumns="true"
+                         editable="false"
+                         paginator="true"                                                                                               
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                         rowsPerPageTemplate="20,30,50,100,500,1000" 
+                         rowKey="#{film.id}">
+                <p:column headerText="Názov">
+                    <h:outputText value="#{film.nazov}"/>
+                </p:column>
+                <p:column headerText="Rok výroby">
+                    <h:outputText value="#{film.rok}"/>
+                </p:column>
+                <p:column headerText="Žáner">
+                    <h:outputText value="#{film.zanerList}"/>
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>
+

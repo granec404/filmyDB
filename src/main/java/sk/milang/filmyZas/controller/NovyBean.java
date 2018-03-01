@@ -87,7 +87,6 @@ public class NovyBean implements Serializable {
 //        mameVysledky = !(obsah.isEmpty());
 //        return mameVysledky;
 //        pripisLog("mame?: "+String.valueOf(vysledkyHladania!=null && vysledkyHladania.size()>0));
-        System.out.println("Mame nejake vysledky? "+(vysledkyHladania!=null ? vysledkyHladania.size() : "null"));
         return (vysledkyHladania!=null && vysledkyHladania.size()>0);
     }
     
@@ -103,29 +102,23 @@ public class NovyBean implements Serializable {
         if (zvoleny==null || zvoleny.isEmpty()) {
             return;
         }
-        System.out.println("ideme natiahnut link "+zvoleny);
         film = ejb.nacitajFilm(zvoleny);
-        if (film!=null) {
-            System.out.println("film nie je null "+film.getNazov());
-        }
         return;
     }
     
     public void zrobHladanie() {
-        System.out.println("hladame...");
         ejb.zrobHladanie(search);
         vysledkyHladania = ejb.nacitajZoznam(search);
-        System.out.println("koniec hladania "+(vysledkyHladania==null ? "null" : String.valueOf(vysledkyHladania.size())));
     }
     
-    public boolean zalozFilm() {
+    public String zalozFilm() {
         Film novy = filmDB.createFromObject(film);
         if (novy==null) {
-            return false;
+            return "";
         } else {
             vynuluj();
         }
-        return true;
+        return "novy?faces-redirect=true";
     }
     
     public void vynuluj() {

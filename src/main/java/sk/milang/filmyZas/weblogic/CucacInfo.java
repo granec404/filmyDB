@@ -102,7 +102,6 @@ public class CucacInfo {
             Scanner scanner = new Scanner(instr, "UTF-8");
             scanner.useDelimiter("\\Z");
             content = scanner.next();
-            System.out.println("Encoding: "+connection.getContentEncoding());
             content = connection.getContentEncoding() + " --- " + content;
         }catch ( Exception ex ) {
         }
@@ -179,7 +178,6 @@ public class CucacInfo {
                     if (pos1 > 0 && pos2 > 0) {
                         int minutaz = 0;
                         try {
-                            System.out.println("Minutaz parse " + content.substring(pos1+8, pos2));
                             minutaz = Integer.parseInt(content.substring(pos1+8, pos2).replace("min", "").trim());
                         } catch (Exception e) {System.out.println(e.getStackTrace());}
                         nacitany.setMinutaz(minutaz);
@@ -191,18 +189,15 @@ public class CucacInfo {
             List<String> h = new ArrayList<String>();
             pos1 = content.indexOf("<h4>Hrají:</h4>", posPom);
             if (pos1>0) {
-                System.out.println("Nasli sme h4 herci");
                 pos2 = content.indexOf("</span>", pos1);
                 if (pos2>0) {
                     posPom = pos2;
                     String herci = content.substring(pos1, pos2);
                     pos1=0; pos2=0;
                     while (herci.indexOf("</a>", pos2)>0) {
-                        System.out.println("herci cycle");
                         pos2 = herci.indexOf("</a>", pos2);     // tu hladam najprv koniec
                         pos1 = herci.lastIndexOf(">", pos2);    // a odneho zaciatok
                         if (pos1 > 0 && pos2 >0) {
-                            System.out.println("najdeny herec "+herci.substring(pos1+1, pos2).trim());
                             h.add(herci.substring(pos1+1, pos2).trim());
                         }
                         pos2 = pos2+1;

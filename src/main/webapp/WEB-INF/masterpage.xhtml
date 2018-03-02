@@ -30,7 +30,10 @@
                 <h:panelGrid style="width: 100%;">
                     <p:menubar>
                         <p:menuitem value="Založiť nový" url="/faces/novy.xhtml" />
-                        <p:menuitem value="Vyhľadávanie" url="/faces/vyhladavanie.xhtml" />
+                        <p:submenu label="Vyhľadávanie">
+                            <p:menuitem value="Vyhľadávanie filmov" url="/faces/vyhladavanieFilmov.xhtml" />
+                            <p:menuitem value="Vyhľadávanie hercov" url="/faces/vyhladavanieFilmov.xhtml" />
+                        </p:submenu>
 <!--                        <p:submenu label="Tyzdnove planovanie">
                             <p:submenu label="Management">
                                 <p:menuitem value="FDCs" url="/faces/FDCs.xhtml" />

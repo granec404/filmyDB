@@ -16,14 +16,11 @@
                 <p:outputLabel>Názov:</p:outputLabel>
                 <p:inputText value="#{vyhladavanieBean.nazov}"/>
 
-                <p:outputLabel>Rok:</p:outputLabel>
+                <p:outputLabel>Rok od-do:</p:outputLabel>
                 <p:inputText value="#{vyhladavanieBean.rok}"/>
 
-                <p:outputLabel>Dĺžka (minutáž) od:</p:outputLabel>
-                <p:inputText value="#{vyhladavanieBean.minutaz1}"/>
-                
-                <p:outputLabel>Dĺžka (minutáž) do:</p:outputLabel>
-                <p:inputText value="#{vyhladavanieBean.minutaz2}"/>
+                <p:outputLabel>Dĺžka (minutáž) od-do:</p:outputLabel>
+                <p:inputText value="#{vyhladavanieBean.minutaz}"/>
 
                 <p:outputLabel>Herci:</p:outputLabel>
                 <p:inputText value="#{vyhladavanieBean.herec}"/>
@@ -57,11 +54,14 @@
                 <p:column headerText="Názov">
                     <h:outputText value="#{film.nazov}"/>
                 </p:column>
-                <p:column headerText="Rok výroby">
-                    <h:outputText value="#{film.rok}"/>
+                 <p:column headerText="Minutáž">
+                     <h:outputText value="#{film.minutaz}"/>
                 </p:column>
                 <p:column headerText="Žáner">
-                    <h:outputText value="#{film.zanerList}"/>
+                    <h:outputText value="#{film.zanerListAsString}"/>
+                </p:column>
+                 <p:column headerText="Rok výroby">
+                    <h:outputText value="#{film.rok}"/>
                 </p:column>
             </p:dataTable>
         </h:panelGroup>

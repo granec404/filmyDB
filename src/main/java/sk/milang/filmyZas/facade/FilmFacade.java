@@ -43,13 +43,7 @@ public class FilmFacade extends AbstractFacade<Film> {
         super(Film.class);
     }
     
-    public List<Film> najdiFilmy(String nazov, int rok, int minOd, int minDo, String zaner, String herec, String krajina) {
-        int rokOd=0;
-        int rokDo=9999;
-        if (rok>0) {
-            rokOd=rok;
-            rokDo=rok;
-        }
+    public List<Film> najdiFilmy(String nazov, int rokOd, int rokDo, int minOd, int minDo, String zaner, String herec, String krajina) {
         nazov = nazov.isEmpty()?"%":"%"+nazov.trim()+"%";
         zaner = (zaner==null || zaner.isEmpty())?"%":"%"+zaner.trim()+"%";
         herec = herec.isEmpty()?"%":"%"+herec.trim()+"%";

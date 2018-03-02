@@ -6,6 +6,7 @@
 package sk.milang.filmyZas.controller;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -34,7 +35,8 @@ public class Vyhladavanie implements Serializable {
     private String nazov="";
     private String herec="";
     private String krajina="";
-    private int rok = 0;
+    private int rok1 = 0;
+    private int rok2 = 9999;
     private int minutaz1 = 0;
     private int minutaz2 = 1000;
     private String zaner = "";
@@ -63,7 +65,7 @@ public class Vyhladavanie implements Serializable {
     }
     
     public void search() {
-        filmy = filmDB.najdiFilmy(nazov, rok, minutaz1, minutaz2, zaner, herec, krajina);
+        filmy = filmDB.najdiFilmy(nazov, rok1, rok2, minutaz1, minutaz2, zaner, herec, krajina);
     }
 
     public List<Film> getFilmy() {
@@ -107,12 +109,44 @@ public class Vyhladavanie implements Serializable {
         this.krajina = krajina;
     }
 
-    public int getRok() {
-        return rok;
+    public String getRok() {
+        return String.valueOf(rok1)+"-"+String.valueOf(rok2);
     }
 
-    public void setRok(int rok) {
-        this.rok = rok;
+    public void setRok(String rok) {
+        if (!rok.contains("-")) {
+            return;
+        }
+        String[] l = rok.split("-");
+        int b1, b2;
+        try {
+            b1 = Integer.parseInt(l[0].trim());
+            b2 = Integer.parseInt(l[1].trim());
+        } catch (Exception e) {
+            return;
+        }
+        rok1 = b1;
+        rok2 = b2;
+    }
+    
+    public String getMinutaz() {
+        return String.valueOf(minutaz1)+"-"+String.valueOf(minutaz2);
+    }
+    
+    public void setMinutaz(String minutaz) {
+        if (!minutaz.contains("-")) {
+            return;
+        }
+        String[] l = minutaz.split("-");
+        int b1, b2;
+        try {
+            b1 = Integer.parseInt(l[0].trim());
+            b2 = Integer.parseInt(l[1].trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        minutaz1 = b1;
+        minutaz2 = b2;
     }
 
     public int getMinutaz1() {
